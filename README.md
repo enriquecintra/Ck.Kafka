@@ -23,22 +23,6 @@ Eu queria **brincar com Kafka do jeito que eu usaria no dia a dia** e acabei mon
 2. Um **Worker** pega essa cotação, consulta **3 “fornecedores” (simulados)** por item
 3. Para cada fornecedor, ele **publica um evento** com o preço → `ck.itens.precificados`
 4. Se der ruim, a ideia é mandar pra uma **DLQ** (`ck.dlq`) e analisar depois
-
-Se você curte desenho, o fluxo é este:
-
-```
-flowchart LR
-  A[Producer\nCk.Cotacao.Producer] -- ck.cotacoes.criadas --> T1[(Kafka)]
-  subgraph Kafka
-    T1[Topic: ck.cotacoes.criadas\n(partitions: 3)]
-    T2[Topic: ck.itens.precificados\n(partitions: 6)]
-    DLQ[Topic: ck.dlq\n(partitions: 1)]
-  end
-  W[Ck.Precos.Worker] -->|consume| T1
-  W -->|publica preços| T2
-  W -->|erros| DLQ
-```
-
 ---
 
 ## ▶️ Como rodar (passo a passo)
