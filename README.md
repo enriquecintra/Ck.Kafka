@@ -26,7 +26,7 @@ Eu queria **brincar com Kafka do jeito que eu usaria no dia a dia** e acabei mon
 
 Se você curte desenho, o fluxo é este:
 
-```mermaid
+```
 flowchart LR
   A[Producer\nCk.Cotacao.Producer] -- ck.cotacoes.criadas --> T1[(Kafka)]
   subgraph Kafka
